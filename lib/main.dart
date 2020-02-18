@@ -13,20 +13,19 @@ class Splash extends StatelessWidget {
     return new SplashScreen(
       seconds: 14,
       navigateAfterSeconds: new MyApp(),
-      title: new Text('UITM Smart Campus',
+      title: new Text('Smart Campus',
         style: new TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 20.0,
-            color: Colors.white
+            color: Colors.deepPurple
         ),
       ),
-      image: new Image.network('https://cdn.freebiesupply.com/logos/large/2x/uitm-universiti-teknologi-mara-logo-png-transparent.png'),
-//      gradientBackground: new LinearGradient(colors: [Colors.cyan, Colors.blue], begin: Alignment.topLeft, end: Alignment.bottomRight),
-      backgroundColor: Colors.deepPurple,
+      image: new Image.network('https://korporat.uitm.edu.my/main/images/download/2019/LogoUiTM.png'),
+      backgroundColor: Colors.white,
       styleTextUnderTheLoader: new TextStyle(),
-      photoSize: 100.0,
+      photoSize: 150.0,
 //      onClick: ()=>print("Flutter Egypt"),
-      loaderColor: Colors.white,
+      loaderColor: Colors.deepPurple,
     );
   }
 }
