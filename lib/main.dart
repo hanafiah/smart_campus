@@ -20,10 +20,10 @@ class Splash extends StatelessWidget {
             color: Colors.deepPurple
         ),
       ),
-      image: new Image.network('https://korporat.uitm.edu.my/main/images/download/2019/LogoUiTM.png'),
+      image: new Image.asset('images/LogoUiTM.png'),
       backgroundColor: Colors.white,
       styleTextUnderTheLoader: new TextStyle(),
-      photoSize: 150.0,
+      photoSize: 160.0,
 //      onClick: ()=>print("Flutter Egypt"),
       loaderColor: Colors.deepPurple,
     );
