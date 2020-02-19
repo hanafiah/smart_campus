@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:smart_campus/mainpage/beacon.dart';
+import 'package:smart_campus/mainpage/campus.dart';
 import 'package:smart_campus/mainpage/menu.dart';
 
 void main() => runApp(MyApp());
@@ -45,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Text('news'),
     Text('logs'),
     BeaconWidget(),
-    Text('campus'),
+    CampusWidget(),
     MenuWidget(),
   ];
 
