@@ -2,6 +2,8 @@
 
 UITM Smart Campus
 
+(https://github.com/hanafiah/smart_campus/blob/final/screen_shot.jpeg)
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
