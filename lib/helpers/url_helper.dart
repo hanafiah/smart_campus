@@ -14,7 +14,7 @@ class UrlHelper {
 
   static Future<void> openUrlWebView(String url) async {
     if (await canLaunch(url)) {
-      await launch(url,forceWebView: true);
+      await launch(url,forceWebView: true,enableJavaScript: true);
     } else {
       throw 'Could not launch $url';
     }
