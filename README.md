@@ -2,7 +2,7 @@
 
 UITM Smart Campus
 
-(https://raw.githubusercontent.com/hanafiah/smart_campus/final/screen_shot.jpeg)
+![screen shot](https://raw.githubusercontent.com/hanafiah/smart_campus/final/screen_shot.jpeg)
 
 ## Getting Started
 
