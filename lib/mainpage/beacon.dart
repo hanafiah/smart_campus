@@ -6,6 +6,19 @@ import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:flutter_beacon/flutter_beacon.dart';
 
+class BeaconTag {
+  String major;
+  String minor;
+  String name;
+
+  BeaconTag(this.major, this.minor, this.name);
+
+  @override
+  String toString() {
+    return '{ ${this.major}, ${this.minor}, ${this.name} }';
+  }
+}
+
 class BeaconWidget extends StatefulWidget {
   @override
   _BeaconWidgetState createState() => _BeaconWidgetState();
@@ -22,21 +35,36 @@ class _BeaconWidgetState extends State<BeaconWidget>
   bool locationServiceEnabled = false;
   bool bluetoothEnabled = false;
 
+  final List<BeaconTag> _beaconTags = <BeaconTag>[
+    BeaconTag('1000', '1', 'Computer Lab'),
+    BeaconTag('1000', '2', 'Office'),
+    BeaconTag('1000', '3', 'Library'),
+    BeaconTag('1000', '9', 'Lobby'),
+  ];
+
   @override
   void initState() {
     WidgetsBinding.instance.addObserver(this);
 
     super.initState();
+    /**
+     * ask for permission when user open this widget
+     */
+    if (!authorizationStatusOk) {
+      flutterBeacon.requestAuthorization;
+    }
 
     listeningState();
   }
 
   listeningState() async {
-    print('Listening to bluetooth state');
+    print('Listening to bluetooth state listeningState()');
+
     _streamBluetooth = flutterBeacon
         .bluetoothStateChanged()
         .listen((BluetoothState state) async {
       print('BluetoothState = $state');
+
       streamController.add(state);
 
       switch (state) {
@@ -96,6 +124,7 @@ class _BeaconWidgetState extends State<BeaconWidget>
     _streamRanging =
         flutterBeacon.ranging(regions).listen((RangingResult result) {
 //      print(result);
+
       if (result != null && mounted) {
         setState(() {
           _regionBeacons[result.region] = result.beacons;
@@ -125,9 +154,9 @@ class _BeaconWidgetState extends State<BeaconWidget>
       compare = a.accuracy.compareTo(b.accuracy);
     }
 
-    if (compare == 0) {
-      compare = a.accuracy.compareTo(b.accuracy);
-    }
+//    if (compare == 0) {
+//      compare = a.accuracy.compareTo(b.accuracy);
+//    }
 
     return compare;
   }
@@ -135,6 +164,7 @@ class _BeaconWidgetState extends State<BeaconWidget>
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) async {
     print('AppLifecycleState = $state');
+
     if (state == AppLifecycleState.resumed) {
       if (_streamBluetooth != null && _streamBluetooth.isPaused) {
         _streamBluetooth.resume();
@@ -162,7 +192,6 @@ class _BeaconWidgetState extends State<BeaconWidget>
     super.dispose();
   }
 
-  @override
   Widget build(BuildContext context) {
     return Container(
       child: Column(
@@ -235,29 +264,61 @@ class _BeaconWidgetState extends State<BeaconWidget>
                     children: ListTile.divideTiles(
                         context: context,
                         tiles: _beacons.map((beacon) {
-                          return ListTile(
-                            title: Text(beacon.proximityUUID),
-                            subtitle: new Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: <Widget>[
-                                Flexible(
-                                    child: Text(
-                                        'Major: ${beacon.major}\nMinor: ${beacon.minor}',
-                                        style: TextStyle(fontSize: 13.0)),
-                                    flex: 1,
-                                    fit: FlexFit.tight),
-                                Flexible(
-                                    child: Text(
-                                        'Accuracy: ${beacon.accuracy}m\nRSSI: ${beacon.rssi}',
-                                        style: TextStyle(fontSize: 13.0)),
-                                    flex: 2,
-                                    fit: FlexFit.tight)
-                              ],
-                            ),
-                          );
+                          BeaconTag _beaconTag = _beaconTags
+                              .where((b) =>
+                                  b.major.contains(beacon.major.toString()))
+                              .where((b) =>
+                                  b.minor.contains(beacon.minor.toString()))
+                              .first;
+
+                          return Card(
+                              child: Row(
+                            children: <Widget>[
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: <Widget>[
+                                    Text(
+                                      '${beacon.accuracy}',
+                                      style: TextStyle(
+                                        fontSize: 80.0,
+                                        color: Colors.deepPurple,
+                                      ),
+                                    ),
+                                    Text('Meter')
+                                  ],
+                                ),
+                              ),
+                              Text(
+                                _beaconTag.name,
+                                style: TextStyle(fontSize: 30.0),
+                              )
+                            ],
+                          ));
+//                          return ListTile(
+//                            title: Text(beacon.proximityUUID),
+//                            subtitle: new Row(
+//                              mainAxisSize: MainAxisSize.max,
+//                              children: <Widget>[
+//                                Flexible(
+//                                    child: Text(
+//                                        'Major: ${beacon.major}\nMinor: ${beacon.minor}',
+//                                        style: TextStyle(fontSize: 13.0)),
+//                                    flex: 1,
+//                                    fit: FlexFit.tight),
+//                                Flexible(
+//                                    child: Text(
+//                                        'Accuracy: ${beacon.accuracy}m\nRSSI: ${beacon.rssi}',
+//                                        style: TextStyle(fontSize: 13.0)),
+//                                    flex: 2,
+//                                    fit: FlexFit.tight)
+//                              ],
+//                            ),
+//                          );
                         })).toList(),
                   ),
-                ),
+                )
         ],
       ),
     );

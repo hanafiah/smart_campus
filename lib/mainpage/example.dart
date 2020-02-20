@@ -7,7 +7,10 @@ class ExampleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     
     return Container(
-      child: Text('Example Blank Page'),
+      child: Text('Example Blank Page', style: TextStyle(
+        color: Colors.white,
+        fontSize: 30,
+      ),),
     );
 
   }

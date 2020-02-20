@@ -49,6 +49,7 @@ class MenuWidget extends StatelessWidget {
                       Text('Web View - responsive')
                     ],
                   ),
+
                   Column(
                     children: <Widget>[
                       IconButton(
@@ -107,6 +108,19 @@ class MenuWidget extends StatelessWidget {
                       Text('New Page')
                     ],
                   ),
+                  Column(
+                    children: <Widget>[
+                      IconButton(
+                        icon: Icon(Icons.access_alarms),
+                        onPressed: () {
+                          UrlHelper.openUrlWebView('https://uitm.edu.my/');
+                        },
+                        iconSize: 50,
+                      ),
+                      Text('Big Icon')
+                    ],
+                  ),
+
 
                 ],
               ),
