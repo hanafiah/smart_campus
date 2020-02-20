@@ -56,9 +56,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
     Colors.white,
     Colors.red,
-    Colors.blue,
-    Colors.brown,
-    Colors.deepPurple,
+    Colors.grey[40],
+    Colors.grey[40],
+    Colors.grey[40],
 
   ];
 

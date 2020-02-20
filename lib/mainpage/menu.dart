@@ -41,6 +41,17 @@ class MenuWidget extends StatelessWidget {
                   Column(
                     children: <Widget>[
                       IconButton(
+                        icon: Icon(Icons.link),
+                        onPressed: () {
+                          UrlHelper.openUrlWebView('https://getbootstrap.com/');
+                        },
+                      ),
+                      Text('Web View - responsive')
+                    ],
+                  ),
+                  Column(
+                    children: <Widget>[
+                      IconButton(
                         icon: Icon(Icons.navigation),
                         onPressed: () {
                           UrlHelper.launchMap(lat: '2.221729',long:'102.453115');
