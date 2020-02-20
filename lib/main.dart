@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:smart_campus/mainpage/beacon.dart';
 import 'package:smart_campus/mainpage/campus.dart';
+import 'package:smart_campus/mainpage/example.dart';
 import 'package:smart_campus/mainpage/menu.dart';
 
 void main() => runApp(MyApp());
@@ -44,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final List<Widget> _children = [
     Text('news'),
-    Text('logs'),
+    ExampleWidget(),
     BeaconWidget(),
     CampusWidget(),
     MenuWidget(),
@@ -93,14 +94,14 @@ class _MyHomePageState extends State<MyHomePage> {
           BubbleBottomBarItem(
               backgroundColor: Colors.white,
               icon: Icon(
-                Icons.access_time,
+                Icons.school,
                 color: Colors.white,
               ),
               activeIcon: Icon(
-                Icons.access_time,
+                Icons.school,
                 color: Colors.white,
               ),
-              title: Text("Logs")),
+              title: Text("Blank")),
           BubbleBottomBarItem(
               backgroundColor: Colors.white,
               icon: Icon(
