@@ -3,6 +3,7 @@ import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:smart_campus/mainpage/beacon.dart';
 import 'package:smart_campus/mainpage/campus.dart';
 import 'package:smart_campus/mainpage/example.dart';
+import 'package:smart_campus/mainpage/example_background.dart';
 import 'package:smart_campus/mainpage/menu.dart';
 
 void main() => runApp(MyApp());
@@ -44,16 +45,27 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   final List<Widget> _children = [
-    Text('news'),
+    ExampleBackgroundWidget(),
     ExampleWidget(),
     BeaconWidget(),
     CampusWidget(),
     MenuWidget(),
   ];
 
+  final List<Color> _bgColor = [
+
+    Colors.white,
+    Colors.red,
+    Colors.blue,
+    Colors.brown,
+    Colors.deepPurple,
+
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: _bgColor[currentIndex],
       appBar: AppBar(
         title: Text(widget.title),
       ),
