@@ -39,6 +39,10 @@ class _BeaconWidgetState extends State<BeaconWidget>
     BeaconTag('1000', '1', 'Computer Lab'),
     BeaconTag('1000', '2', 'Office'),
     BeaconTag('1000', '3', 'Library'),
+    BeaconTag('1000', '5', 'Musolla'),
+    BeaconTag('1000', '6', 'Cafe'),
+    BeaconTag('1000', '7', 'Car Park'),
+    BeaconTag('1000', '8', 'Hulala'),
     BeaconTag('1000', '9', 'Lobby'),
   ];
 
@@ -270,7 +274,7 @@ class _BeaconWidgetState extends State<BeaconWidget>
                               .where((b) =>
                                   b.minor.contains(beacon.minor.toString()))
                               .first;
-
+print(_beaconTag);
                           return Card(
                               child: Row(
                             children: <Widget>[
@@ -291,7 +295,7 @@ class _BeaconWidgetState extends State<BeaconWidget>
                                 ),
                               ),
                               Text(
-                                _beaconTag!=null?_beaconTag.name:beacon.minor,
+                                _beaconTag!=null?_beaconTag.name:'${beacon.minor}',
                                 style: TextStyle(fontSize: 30.0),
                               )
                             ],
