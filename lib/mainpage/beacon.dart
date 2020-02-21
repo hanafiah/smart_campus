@@ -42,7 +42,7 @@ class _BeaconWidgetState extends State<BeaconWidget>
     BeaconTag('1000', '5', 'Musolla'),
     BeaconTag('1000', '6', 'Cafe'),
     BeaconTag('1000', '7', 'Car Park'),
-    BeaconTag('1000', '8', 'Hulala'),
+//    BeaconTag('1000', '8', 'Hulala'),
     BeaconTag('1000', '9', 'Lobby'),
   ];
 
@@ -269,11 +269,8 @@ class _BeaconWidgetState extends State<BeaconWidget>
                         context: context,
                         tiles: _beacons.map((beacon) {
                           BeaconTag _beaconTag = _beaconTags
-                              .where((b) =>
-                                  b.major.contains(beacon.major.toString()))
-                              .where((b) =>
-                                  b.minor.contains(beacon.minor.toString()))
-                              .first;
+                              .where((b) => b.major.contains(beacon.major.toString()))
+                              .firstWhere((b) => b.minor.contains(beacon.minor.toString()),orElse: () => null);
 print(_beaconTag);
                           return Card(
                               child: Row(
@@ -294,9 +291,11 @@ print(_beaconTag);
                                   ],
                                 ),
                               ),
-                              Text(
-                                _beaconTag!=null?_beaconTag.name:'${beacon.minor}',
-                                style: TextStyle(fontSize: 30.0),
+                              Expanded(
+                                child: Text(
+                                  _beaconTag != null?_beaconTag.name:'Unknown Beacon Major:${beacon.major} Minor:${beacon.minor}',
+                                  style: TextStyle(fontSize: 30.0),
+                                ),
                               )
                             ],
                           ));
