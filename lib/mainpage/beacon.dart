@@ -291,7 +291,7 @@ class _BeaconWidgetState extends State<BeaconWidget>
                                 ),
                               ),
                               Text(
-                                _beaconTag.name,
+                                _beaconTag!=null?_beaconTag.name:beacon.minor,
                                 style: TextStyle(fontSize: 30.0),
                               )
                             ],
